@@ -44,8 +44,10 @@ cast send $HASH_POWER_CENTER \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
   --gas-limit 100000
+sleep 3
 
 echo "✅ StakingManager已授权"
+sleep 5
 
 echo ""
 echo "1.2 授权PerpetualBond访问HashPowerCenter..."
@@ -55,8 +57,10 @@ cast send $HASH_POWER_CENTER \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
   --gas-limit 100000
+sleep 3
 
 echo "✅ PerpetualBond已授权"
+sleep 5
 
 echo ""
 echo "1.3 配置WithdrawalManager..."
@@ -66,6 +70,7 @@ cast send $WITHDRAWAL_MANAGER \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
   --gas-limit 100000
+sleep 3
 
 cast send $WITHDRAWAL_MANAGER \
   "setRewardContractAuthorization(address,bool)" \
@@ -73,6 +78,7 @@ cast send $WITHDRAWAL_MANAGER \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
   --gas-limit 100000
+sleep 3
 
 cast send $WITHDRAWAL_MANAGER \
   "setEquityBond(address)" \
@@ -80,6 +86,7 @@ cast send $WITHDRAWAL_MANAGER \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
   --gas-limit 100000
+sleep 3
 
 echo "✅ WithdrawalManager配置完成"
 
@@ -99,6 +106,7 @@ cast send $USDT \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
   --gas-limit 100000
+sleep 3
 
 USDT_BALANCE=$(cast call $USDT "balanceOf(address)(uint256)" $DEPLOYER --rpc-url $RPC_URL)
 echo "✅ USDT余额: $USDT_BALANCE"
@@ -119,6 +127,7 @@ cast send $USDT \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
   --gas-limit 100000
+sleep 3
 
 echo "✅ USDT授权完成"
 

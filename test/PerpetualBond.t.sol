@@ -193,13 +193,13 @@ contract PerpetualBondTest is Test {
         
         // 绑定推荐关系
         vm.prank(referrer);
-        referralRegistry.bindUpline(owner);
+        referralRegistry.setInvite(owner);
         
         vm.prank(user1);
-        referralRegistry.bindUpline(referrer);
+        referralRegistry.setInvite(referrer);
         
         vm.prank(user2);
-        referralRegistry.bindUpline(referrer);
+        referralRegistry.setInvite(referrer);
         
         // 给用户分配代币
         usdt.mint(user1, 1000000 * 10**18);
@@ -394,7 +394,7 @@ contract PerpetualBondTest is Test {
         vm.prank(user1);
         perpetualBond.claimPrincipal(1, claimable);
         
-        (,,,,,,,uint256 claimedPrincipal,,,) = perpetualBond.orders(1);
+        (,,,,,,,uint256 claimedPrincipal,,,,) = perpetualBond.orders(1);
         assertEq(claimedPrincipal, claimable);
     }
     
@@ -414,7 +414,7 @@ contract PerpetualBondTest is Test {
         vm.prank(user1);
         perpetualBond.claimPrincipal(1, claimable);
         
-        (,,,,,,,uint256 claimedPrincipal,,,) = perpetualBond.orders(1);
+        (,,,,,,,uint256 claimedPrincipal,,,,) = perpetualBond.orders(1);
         assertEq(claimedPrincipal, expectedTokens);
     }
     
@@ -443,7 +443,7 @@ contract PerpetualBondTest is Test {
         vm.prank(user1);
         perpetualBond.claimPrincipal(1, claimable3);
         
-        (,,,,,,,uint256 claimedPrincipal,,,) = perpetualBond.orders(1);
+        (,,,,,,,uint256 claimedPrincipal,,,,) = perpetualBond.orders(1);
         assertApproxEqRel(claimedPrincipal, expectedTokens, 0.01e18);
     }
     
@@ -460,7 +460,7 @@ contract PerpetualBondTest is Test {
         vm.prank(rewardDistributor);
         perpetualBond.addOrderRewards(1, rewardAmount);
         
-        (,,,,,,,, uint256 pendingRewards,,) = perpetualBond.orders(1);
+        (,,,,,,,, uint256 pendingRewards,,,) = perpetualBond.orders(1);
         assertEq(pendingRewards, rewardAmount);
     }
     
@@ -482,7 +482,7 @@ contract PerpetualBondTest is Test {
         
         assertEq(wlgc.balanceOf(user1) - user1WlgcBefore, rewardAmount);
         
-        (,,,,,,,,, uint256 claimedRewards,) = perpetualBond.orders(1);
+        (,,,,,,,,, uint256 claimedRewards,,) = perpetualBond.orders(1);
         assertEq(claimedRewards, rewardAmount);
     }
     
@@ -500,14 +500,14 @@ contract PerpetualBondTest is Test {
         vm.prank(rewardDistributor);
         perpetualBond.addOrderRewards(1, 5 * 10**18);
         
-        (,,,,,,,, uint256 pendingRewards,,) = perpetualBond.orders(1);
+        (,,,,,,,, uint256 pendingRewards,,,) = perpetualBond.orders(1);
         assertEq(pendingRewards, 15 * 10**18);
         
         // 领取部分利息
         vm.prank(user1);
         perpetualBond.claimRewards(1, 8 * 10**18);
         
-        (,,,,,,,, uint256 pendingRewards2, uint256 claimedRewards,) = perpetualBond.orders(1);
+        (,,,,,,,, uint256 pendingRewards2, uint256 claimedRewards,,) = perpetualBond.orders(1);
         assertEq(pendingRewards2, 7 * 10**18);
         assertEq(claimedRewards, 8 * 10**18);
     }

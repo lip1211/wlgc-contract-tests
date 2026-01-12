@@ -185,7 +185,7 @@ contract PerpetualBondTest is Test {
         perpetualBond.setRewardDistributorAuthorization(rewardDistributor, true);
         
         // 配置算力中心授权
-        hashPowerCenter.setContractAuthorization(address(perpetualBond), true);
+        hashPowerCenter.setAuthorizedContract(address(perpetualBond), true);
         
         // 配置提现管理授权
         withdrawalManager.setRewardContractAuthorization(address(perpetualBond), true);

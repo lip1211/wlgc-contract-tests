@@ -43,7 +43,7 @@ cast send $HASH_POWER_CENTER \
   $STAKING_MANAGER true \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
-  --gas-limit 100000
+  --gas-limit 100000 --gas-price 1000000000
 sleep 3
 
 echo "✅ StakingManager已授权"
@@ -56,7 +56,7 @@ cast send $HASH_POWER_CENTER \
   $PERPETUAL_BOND true \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
-  --gas-limit 100000
+  --gas-limit 100000 --gas-price 1000000000
 sleep 3
 
 echo "✅ PerpetualBond已授权"
@@ -69,7 +69,7 @@ cast send $WITHDRAWAL_MANAGER \
   $STAKING_MANAGER true \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
-  --gas-limit 100000
+  --gas-limit 100000 --gas-price 1000000000
 sleep 3
 
 cast send $WITHDRAWAL_MANAGER \
@@ -77,7 +77,7 @@ cast send $WITHDRAWAL_MANAGER \
   $PERPETUAL_BOND true \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
-  --gas-limit 100000
+  --gas-limit 100000 --gas-price 1000000000
 sleep 3
 
 cast send $WITHDRAWAL_MANAGER \
@@ -85,7 +85,7 @@ cast send $WITHDRAWAL_MANAGER \
   $PERPETUAL_BOND \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
-  --gas-limit 100000
+  --gas-limit 100000 --gas-price 1000000000
 sleep 3
 
 echo "✅ WithdrawalManager配置完成"
@@ -105,7 +105,7 @@ cast send $USDT \
   1000000000000000000000000 \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
-  --gas-limit 100000
+  --gas-limit 100000 --gas-price 1000000000
 sleep 3
 
 USDT_BALANCE=$(cast call $USDT "balanceOf(address)(uint256)" $DEPLOYER --rpc-url $RPC_URL)
@@ -126,7 +126,7 @@ cast send $USDT \
   1000000000000000000000 \
   --rpc-url $RPC_URL \
   --private-key $PRIVATE_KEY \
-  --gas-limit 100000
+  --gas-limit 100000 --gas-price 1000000000
 sleep 3
 
 echo "✅ USDT授权完成"
